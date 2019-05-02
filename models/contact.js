@@ -4,32 +4,46 @@ const validator = require('validator');
 const _ = require('lodash');
 
 var ContactSchema = new mongoose.Schema({
-    email: {
+    name: {
         type: String,
         trim: true,
         required: true,
-        minlength: 6,
-        unique: true,
-        validate: {
-            validator: validator.isEmail,
-            message: '{VALUE} is not a valid email'
-        }
+        minlength: 4,
     },
-    password: {
-        type: String,
-        required: true,
-        minlength: 6
-    },
-    tokens: [{
-        access: {
+
+    email: [{
+        tag: {
             type: String,
             trim: true,
             required: true
         },
-        token: {
+        id: {
+            type: String,
+            trim: true,
+            required: true,
+            minlength: 6,
+            validate: {
+                validator: validator.isEmail,
+                message: '{VALUE} is not a valid email'
+            }
+        }
+    }],
+    phone: [{
+        tag: {
             type: String,
             trim: true,
             required: true
+        },
+        number: {
+            type: String,
+            minlength: 10,
+            maxlength: 10,
+            trim: true,
+            required: true,
+            validate: {
+                validator: validator.isNumeric,
+                message: '{VALUE} is not a valid phone number'
+            }
         }
     }]
 });
@@ -38,7 +52,7 @@ var ContactSchema = new mongoose.Schema({
 
 ContactSchema.methods.toJSON = function () {
     var contact = this;
-    return _.pick(contact, ['_id', 'email']);
+    return _.pick(contact, ['name', 'email', 'phone']);
 };
 
 

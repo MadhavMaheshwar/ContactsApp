@@ -1,26 +1,15 @@
 
 const mongoose = require('mongoose');
+var contact = require('./contact');
 
 var ContactGroup = mongoose.model('ContactGroup', {
-    text: {
+    name: {
         type: String,
         required: true,
         trim: true,
         minlength: 3
     },
-    completed: {
-        type: Boolean,
-        default: false,
-        required: true
-    },
-    completedAt: {
-        type: Number,
-        default: null
-    },
-    _creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
-    }
+    contacts: [contact.schema]
 });
 
 module.exports = ContactGroup;
