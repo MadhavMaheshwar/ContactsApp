@@ -1,0 +1,10 @@
+{
+    "production": {
+        "PORT": 3000,
+        "MONGODB_URI": "mongodb://db_contacts_app:ContactsApp@ds249355.mlab.com:49355/ContactsApp"
+    },
+    "development": {
+        "PORT": 3000,
+        "MONGODB_URI": "mongodb://localhost:27017/ContactsApp"
+    }
+}
